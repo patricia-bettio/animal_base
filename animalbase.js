@@ -3,7 +3,6 @@
 window.addEventListener("DOMContentLoaded", start);
 
 let allAnimals = [];
-//let result;
 // The prototype for all animals: 
 const Animal = {
     name: "",
@@ -14,13 +13,16 @@ const Animal = {
 
 function start( ) {
     console.log("ready");
-
-    // TODO: Add evefilterList()
     loadJSON();
-    document.querySelector("[data-filter='cat").addEventListener("click", filterCats);
-    document.querySelector("[data-filter='dog").addEventListener("click", filterDogs);
-    document.querySelector("[data-filter='*").addEventListener("click", filterAll);
-}
+    // TODO: Add evefilterList()
+    document.querySelector("[data-filter='cat']").addEventListener("click", filterCats);
+    document.querySelector("[data-filter='dog']").addEventListener("click", filterDogs);
+    document.querySelector("[data-filter='*']").addEventListener("click", filterAll);
+    //Sorting
+    
+    document.querySelector("[data-sort='name']").addEventListener("click", sortName);
+    document.querySelector("[data-sort='age']").addEventListener("click", sortAge);
+    
 
 
 async function loadJSON() {
@@ -56,7 +58,7 @@ function filterCats(){
     const onlyCats = allAnimals.filter(displayCats);
     displayList(onlyCats)
     function displayCats(animal){
-        return animal.type === "cat";
+    return animal.type === "cat";
         /*
         //testing
         if (animal.type === "cat"){
@@ -68,7 +70,6 @@ function filterCats(){
         return result
         */
     }
-
  } 
 
  //Function to display Dogs only
@@ -76,7 +77,7 @@ function filterCats(){
     const onlyDogs = allAnimals.filter(displayDogs);
     displayList(onlyDogs)
     function displayDogs(animal){
-        return animal.type === "dog";
+    return animal.type === "dog";
     }
  } 
 
@@ -114,8 +115,10 @@ function displayAnimal( animal ) {
 
 function sortName(){
 if (event.target.dataset.action === "sort_name_asc") {
+    event.preventDefault()
     nameAsc();
 } else {
+    event.preventDefault();
     nameDesc();
 }
 }
@@ -133,16 +136,39 @@ function nameDesc(){
     allAnimals.sort(compareName)
     displayList(allAnimals)
   }
-//Sort name DESC
-function nameAsc(){
-    console.log(allAnimals)
-    function compareName(a, b){
-    if(a.name > b.name) {
+
+  function sortAge(){
+    if (event.target.dataset.action === "sort_age_asc") {
+        ageAsc();
+        removeEventListener
+    } else {
+        ageDesc();
+    }
+    }
+
+//Sort age ASC
+function ageAsc(){
+    function compareAge(a, b){
+    if(a.age < b.age) {
+    return 1;
+    } else if (a.age > b.age){
     return -1;
-    } else if (a.name < b.name){
+    }
+    }   
+    allAnimals.sort(compareAge)
+    displayList(allAnimals)
+  }
+
+  //Sort age DESC
+function ageDesc(){
+    function compareAge(a, b){
+    if(a.age < b.age) {
+    return -1;
+    } else if (a.age > b.age){
     return 1;
     }
     }   
-    allAnimals.sort(compareName)
+    allAnimals.sort(compareAge)
     displayList(allAnimals)
-    }
+  }
+ }
