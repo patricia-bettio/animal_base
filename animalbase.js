@@ -110,3 +110,39 @@ function displayAnimal( animal ) {
     // append clone to list
     document.querySelector("#list tbody").appendChild( clone );
 }
+
+
+function sortName(){
+if (event.target.dataset.action === "sort_name_asc") {
+    nameAsc();
+} else {
+    nameDesc();
+}
+}
+ 
+//Sort name ASC
+function nameDesc(){
+    console.log(allAnimals)
+    function compareName(a, b){
+    if(a.name < b.name) {
+    return -1;
+    } else if (a.name > b.name){
+    return 1;
+    }
+    }   
+    allAnimals.sort(compareName)
+    displayList(allAnimals)
+  }
+//Sort name DESC
+function nameAsc(){
+    console.log(allAnimals)
+    function compareName(a, b){
+    if(a.name > b.name) {
+    return -1;
+    } else if (a.name < b.name){
+    return 1;
+    }
+    }   
+    allAnimals.sort(compareName)
+    displayList(allAnimals)
+    }
