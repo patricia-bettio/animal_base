@@ -21,6 +21,7 @@ function start( ) {
     //Sorting
     
     document.querySelector("[data-sort='name']").addEventListener("click", sortName);
+    document.querySelector("[data-sort='name']").addEventListener("click", sortName);
     document.querySelector("[data-sort='age']").addEventListener("click", sortAge);
     
 
@@ -56,9 +57,11 @@ function preapareObject( jsonObject ) {
 //Function to display Cats only
 function filterCats(){
     const onlyCats = allAnimals.filter(displayCats);
+    
     displayList(onlyCats)
     function displayCats(animal){
     return animal.type === "cat";
+    
         /*
         //testing
         if (animal.type === "cat"){
@@ -114,12 +117,14 @@ function displayAnimal( animal ) {
 
 
 function sortName(){
-if (event.target.dataset.action === "sort_name_asc") {
-    event.preventDefault()
+if (event.target.dataset.sortDirection === "asc") {
+    event.target.dataset.sortDirection = "desc";
+    console.log("sort asc")
     nameAsc();
 } else {
-    event.preventDefault();
+    console.log("sort desc")
     nameDesc();
+    event.target.dataset.sortDirection = "asc";
 }
 }
  
@@ -137,12 +142,27 @@ function nameDesc(){
     displayList(allAnimals)
   }
 
+  //Sort name desc
+function nameAsc(){
+    console.log(allAnimals)
+    function compareName(a, b){
+    if(a.name < b.name) {
+    return 1;
+    } else if (a.name > b.name){
+    return -1;
+    }
+    }   
+    allAnimals.sort(compareName)
+    displayList(allAnimals)
+  }
+
   function sortAge(){
-    if (event.target.dataset.action === "sort_age_asc") {
+    if (event.target.dataset.sortDirection === "asc") {
+        event.target.dataset.sortDirection = "desc"
         ageAsc();
-        removeEventListener
     } else {
         ageDesc();
+        event.target.dataset.sortDirection = "asc"
     }
     }
 
