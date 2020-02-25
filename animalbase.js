@@ -3,6 +3,7 @@
 window.addEventListener("DOMContentLoaded", start);
 
 let allAnimals = [];
+
 // The prototype for all animals: 
 const Animal = {
     name: "",
@@ -23,7 +24,7 @@ function start( ) {
     document.querySelector("[data-sort='type']").addEventListener("click", sortType);
     document.querySelector("[data-sort='desc']").addEventListener("click", sortDesc);
     document.querySelector("[data-sort='age']").addEventListener("click", sortAge);
- }   
+}   
 
 async function loadJSON() {
     const response = await fetch("animals.json");
@@ -56,11 +57,9 @@ function preapareObject( jsonObject ) {
 //Function to display Cats only
 function filterCats(){
     const onlyCats = allAnimals.filter(displayCats);
-    
     displayList(onlyCats)
     function displayCats(animal){
     return animal.type === "cat";
-    
         /*
         //testing
         if (animal.type === "cat"){
@@ -71,7 +70,7 @@ function filterCats(){
         }
         return result
         */
-    }
+    } 
  } 
 
  //Function to display Dogs only
@@ -203,7 +202,6 @@ function sortDesc(){
         event.target.dataset.sortDirection = "asc"
     }
     }
-
 //condition - ascending
 function descAsc(){
     function compareAge(a, b){
@@ -251,7 +249,6 @@ function ageAsc(){
     allAnimals.sort(compareAge)
     displayList(allAnimals)
   }
-
 //condition - descending
 function ageDesc(){
     function compareAge(a, b){
