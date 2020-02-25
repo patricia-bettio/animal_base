@@ -19,12 +19,11 @@ function start( ) {
     document.querySelector("[data-filter='dog']").addEventListener("click", filterDogs);
     document.querySelector("[data-filter='*']").addEventListener("click", filterAll);
     //Sorting
-    
     document.querySelector("[data-sort='name']").addEventListener("click", sortName);
-    document.querySelector("[data-sort='name']").addEventListener("click", sortName);
+    document.querySelector("[data-sort='type']").addEventListener("click", sortType);
+    document.querySelector("[data-sort='desc']").addEventListener("click", sortDesc);
     document.querySelector("[data-sort='age']").addEventListener("click", sortAge);
-    
-
+ }   
 
 async function loadJSON() {
     const response = await fetch("animals.json");
@@ -115,7 +114,8 @@ function displayAnimal( animal ) {
     document.querySelector("#list tbody").appendChild( clone );
 }
 
-
+//SORTING
+//sort by NAME
 function sortName(){
 if (event.target.dataset.sortDirection === "asc") {
     event.target.dataset.sortDirection = "desc";
@@ -127,26 +127,24 @@ if (event.target.dataset.sortDirection === "asc") {
     event.target.dataset.sortDirection = "asc";
 }
 }
- 
-//Sort name ASC
-function nameDesc(){
-    console.log(allAnimals)
-    function compareName(a, b){
-    if(a.name < b.name) {
-    return -1;
-    } else if (a.name > b.name){
-    return 1;
-    }
-    }   
-    allAnimals.sort(compareName)
-    displayList(allAnimals)
-  }
-
-  //Sort name desc
+//condition - ascending
 function nameAsc(){
     console.log(allAnimals)
     function compareName(a, b){
     if(a.name < b.name) {
+    return -1;
+    } else if (a.name > b.name){
+    return 1;
+    }
+    }   
+    allAnimals.sort(compareName)
+    displayList(allAnimals)
+  }
+//condition - descending
+function nameDesc(){
+    console.log(allAnimals)
+    function compareName(a, b){
+    if(a.name < b.name) {
     return 1;
     } else if (a.name > b.name){
     return -1;
@@ -156,6 +154,82 @@ function nameAsc(){
     displayList(allAnimals)
   }
 
+//sort by TYPE
+function sortType(){
+    if (event.target.dataset.sortDirection === "asc") {
+        event.target.dataset.sortDirection = "desc";
+        console.log("sort asc")
+        typeAsc();
+    } else {
+        console.log("sort desc")
+        typeDesc();
+        event.target.dataset.sortDirection = "asc";
+    }
+    }
+//condition - ascending
+function typeAsc(){
+    console.log(allAnimals)
+    function compareName(a, b){
+    if(a.type < b.type) {
+    return -1;
+    } else if (a.type > b.type){
+    return 1;
+    }
+    }   
+    allAnimals.sort(compareName)
+    displayList(allAnimals)
+  }
+//condition - descending
+function typeDesc(){
+    console.log(allAnimals)
+    function compareName(a, b){
+    if(a.type < b.type) {
+    return 1;
+    } else if (a.type > b.type){
+    return -1;
+    }
+    }   
+    allAnimals.sort(compareName)
+    displayList(allAnimals)
+  }
+
+//sort by DESCRIPTION
+function sortDesc(){
+    if (event.target.dataset.sortDirection === "asc") {
+        event.target.dataset.sortDirection = "desc"
+        descAsc();
+    } else {
+        descDesc();
+        event.target.dataset.sortDirection = "asc"
+    }
+    }
+
+//condition - ascending
+function descAsc(){
+    function compareAge(a, b){
+    if(a.desc < b.desc) {
+    return -1;
+    } else if (a.desc > b.desc){
+    return 1;
+    }
+    }   
+    allAnimals.sort(compareAge)
+    displayList(allAnimals)
+  }
+//condition - descending
+function descDesc(){
+    function compareAge(a, b){
+    if(a.desc < b.desc) {
+    return 1;
+    } else if (a.desc > b.desc){
+    return -1;
+    }
+    }   
+    allAnimals.sort(compareAge)
+    displayList(allAnimals)
+  }
+
+//sort by AGE
   function sortAge(){
     if (event.target.dataset.sortDirection === "asc") {
         event.target.dataset.sortDirection = "desc"
@@ -165,30 +239,28 @@ function nameAsc(){
         event.target.dataset.sortDirection = "asc"
     }
     }
-
-//Sort age ASC
+//condition - ascending
 function ageAsc(){
     function compareAge(a, b){
     if(a.age < b.age) {
-    return 1;
-    } else if (a.age > b.age){
     return -1;
+    } else if (a.age > b.age){
+    return 1;
     }
     }   
     allAnimals.sort(compareAge)
     displayList(allAnimals)
   }
 
-  //Sort age DESC
+//condition - descending
 function ageDesc(){
     function compareAge(a, b){
     if(a.age < b.age) {
-    return -1;
-    } else if (a.age > b.age){
     return 1;
+    } else if (a.age > b.age){
+    return -1;
     }
     }   
     allAnimals.sort(compareAge)
     displayList(allAnimals)
   }
- }
